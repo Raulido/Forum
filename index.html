@@ -16,13 +16,13 @@
             <form>
                 <div>
                     <label>Email</label>
-                    <input type="text" class="text-input" />
+                    <input type="text" class="text-input" id="email" />
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type="password" class="text-input" />
+                    <input type="password" class="text-input" id="password" />
                 </div>
-                <button type="submit" class="primary-btn" onclick="">Sign In</button>
+                <button class="primary-btn" onclick="login()">Log In</button>
             </form>
             <div class="links">
                 <a href="./recover.html">Forgot Password</a>
@@ -35,6 +35,9 @@
             <a href="./signup.html" class="secondary-btn">Create an account</a>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
     <script src="./fireBase.js"></script>
     <script src="./login.js"></script>
 </body>
