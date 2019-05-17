@@ -5,8 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rebirth</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
-    
+    <div id="left">
+        <div id="signin" class = "left">
+            <div class="logo">
+                <img src="./RebirthBanner.png" alt="Rebirth" />
+            </div>
+            <form>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" class="text-input email"/>
+                </div>
+                <button class="primary-btn">Recover</button>
+            </form>
+            <a href="./index.html" class="secondary-btn">Go Back</a>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
+    <script src="./fireBase.js"></script>
+    <script src="./recover.js"></script>
 </body>
 </html>
