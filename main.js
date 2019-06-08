@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       location.href="index.html";
     }
 });
-$(".left form").on("submit", function(event){
+$(".col-lg-6 form").on("submit", function(event){
     event.preventDefault();
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
@@ -25,3 +25,24 @@ $(".left form").on("submit", function(event){
         console.log(error);
     });
 });
+
+function showDiscussions(cat_id){
+    var html_id = "#cat_discussions_" + cat_id;
+    if($(html_id).css("display") == "block"){
+        $(html_id).css("display", "none");
+    }else{
+        $(html_id).css("display", "block");
+    }
+}
+
+function startDiscussion(cat_id){
+    var html_id = "#cat_new_discussion_" + cat_id;
+    var button_id = "#startDiscussionButton_" + cat_id;
+    if($(html_id).css("display") == 'block'){
+        $(html_id).css("display", "none");
+        $(button_id).text("Start Discussion");
+    }else{
+        $(html_id).css("display", "block");
+        $(button_id).text("Cancel");
+    }
+}
