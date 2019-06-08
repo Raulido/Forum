@@ -15,16 +15,14 @@ firebase.auth().onAuthStateChanged(function(user) {
       location.href="index.html";
     }
 });
-$(".col-lg-6 form").on("submit", function(event){
-    event.preventDefault();
+
+function logout(){
     firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-        location.href="main.html";
-    }).catch(function(error) {
+        location.href="index.html";
+      }).catch(function(error) {
         // An error happened.
-        console.log(error);
-    });
-});
+      });
+}
 
 function showDiscussions(cat_id){
     var html_id = "#cat_discussions_" + cat_id;
