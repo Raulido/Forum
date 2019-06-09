@@ -201,10 +201,13 @@ function newElement() {
     }
     var user = firebase.auth().currentUser;
     var email = user.email;
+    
     var thread = firebaseRef.child("/threads/" + CurrentThread);
+    
     var x = thread.child("comments").push();
     x.child("comment").set(text);
     x.child("user").set(user.email);
+    
 
     var element = document.getElementById("thread5");
     var p = document.createElement("p");
@@ -212,4 +215,10 @@ function newElement() {
     p.appendChild(node);
     p.style = "background-color: grey;color: black";
     element.appendChild(p);
+
+    return firebase.database().ref('threads/' + CurrentThread).once('value').then(function(snapshot) {
+        var Rcount = (snapshot.val().Rcount);
+        Rcount = Rcount + 1;
+        thread.child("Rcount").set(Rcount);
+    });
   }
