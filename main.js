@@ -77,7 +77,7 @@ function hello(x){
     var p = document.createElement("p");
     var node = document.createTextNode(title + " by " + author +"\n" + ": " + content);
     p.appendChild(node);
-    p.style = "background-color: white;color: black";
+    p.style = "background-color: white;color: black;padding: 15px;font-weight: bold; font-size:1.2em;";
     element.appendChild(p);
     
     var p = document.createElement("p");
@@ -97,7 +97,7 @@ function hello(x){
           var p = document.createElement("p");
           var node = document.createTextNode(childData2 + ": "+ childData);
           p.appendChild(node);
-          p.style = "background-color: grey;color: black";
+          p.style = "background-color: white;color: black;padding: 5px;";
           element.appendChild(p);
       });
     });
@@ -213,7 +213,7 @@ function newElement() {
     var p = document.createElement("p");
     var node = document.createTextNode(user.email + ": "+ text);
     p.appendChild(node);
-    p.style = "background-color: grey;color: black";
+    p.style = "background-color: white;color: black;padding: 5px";
     element.appendChild(p);
 
     return firebase.database().ref('threads/' + CurrentThread).once('value').then(function(snapshot) {
