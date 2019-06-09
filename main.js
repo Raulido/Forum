@@ -17,7 +17,57 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 const list = firebase.database().ref().child("threads");
+function reverse(){
+  CurrentThread = "";
+  $("#second").css("display", "none"); 
+  $("#first").css("display", "block"); 
+}
+var CurrentThread = "";
+function hello(x){
+  console.log("yo");
+  CurrentThread = x;
+  $("#first").css("display", "none"); 
+  $("#second").css("display", "block");
+  var userId = firebase.auth().currentUser.uid;
+  return firebase.database().ref('threads/' + x).once('value').then(function(snapshot) {
+    var content = (snapshot.val() && snapshot.val().text);
+    var title = (snapshot.val() && snapshot.val().title);
+    var author = (snapshot.val() && snapshot.val().author);
+    var element = document.getElementById("thread5");
+    var p = document.createElement("p");
+    var node = document.createTextNode("Topic");
+    p.appendChild(node);
+    element.appendChild(p);
 
+    var p = document.createElement("p");
+    var node = document.createTextNode(title + " by " + author +"\n" + ": " + content);
+    p.appendChild(node);
+    p.style = "background-color: white;color: black";
+    element.appendChild(p);
+    
+    var p = document.createElement("p");
+    var node = document.createTextNode("Comments");
+    p.appendChild(node);
+    element.appendChild(p);
+
+    var query = firebase.database().ref('threads/' + x + '/comments/').orderByKey();
+    query.once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          // key will be "ada" the first time and "alan" the second time
+          var key = childSnapshot.key;
+          // childData will be the actual contents of the child
+          var childData = childSnapshot.val().comment;
+          var childData2 = childSnapshot.val().user;
+          var p = document.createElement("p");
+          var node = document.createTextNode(childData2 + ": "+ childData);
+          p.appendChild(node);
+          p.style = "background-color: grey;color: black";
+          element.appendChild(p);
+      });
+    });
+  });
+}
 list.on("child_added",snap => {
     var title = snap.val().title;
     var author = snap.val().author;
@@ -31,9 +81,9 @@ list.on("child_added",snap => {
     
 
     var td = document.createElement("td");
-    var a = document.createElement("a");
+    var a = document.createElement("button");
     var node = document.createTextNode(title);
-    a.href = "#";
+    a.onclick = function(){hello(snap.key)};
     a.appendChild(node);
     td.appendChild(a);
     tr.appendChild(td);
@@ -55,34 +105,7 @@ list.on("child_added",snap => {
 
 
     
-    console.log(snap.val());
 });
-
-/*
-var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-*/
 function logout(){
     firebase.auth().signOut().then(function() {
         location.href="index.html";
@@ -133,4 +156,27 @@ function newElement() {
     thread.child("text").set(text);
     thread.child("Rcount").set(0);
     thread.child("author").set(email);
+    thread.child("threadID").set(thread.key);
+  }
+
+  function newComment() {
+    var firebaseRef = firebase.database().ref();
+    var text = $("#6").val();
+    if(text == ""){
+        window.alert("Empty Title or Text");
+        return;
+    }
+    var user = firebase.auth().currentUser;
+    var email = user.email;
+    var thread = firebaseRef.child("/threads/" + CurrentThread);
+    var x = thread.child("comments").push();
+    x.child("comment").set(text);
+    x.child("user").set(user.email);
+
+    var element = document.getElementById("thread5");
+    var p = document.createElement("p");
+    var node = document.createTextNode(user.email + ": "+ text);
+    p.appendChild(node);
+    p.style = "background-color: grey;color: black";
+    element.appendChild(p);
   }

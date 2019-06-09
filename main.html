@@ -19,7 +19,7 @@
 <div class="headerfixedbar">
         <div class="row">
             <div class=col-6 text-left" style="margin-top: 10px;">
-                <a class="headerLogoText" href="main.html">Rebirth Forum</a>
+                <a class="headerLogoText" onclick="reverse()" href="main.html">Rebirth Forum</a>
             </div>
 
             <div class=col-6 text-right">
@@ -27,8 +27,8 @@
                     <button onclick ="logout()" class="btn btn-primary themeButton pullRight">Log Out</button>
                 </form>
                 <form action="profile.html">
-                        <button class="btn btn-primary themeButton pullRight mr-1" onclick="openProfile()">Profile Settings</button>
-                    </form>
+                    <button class="btn btn-primary themeButton pullRight mr-1" onclick="openProfile()">Profile Settings</button>
+                </form>
             </div>
         </div>
     </div>
@@ -36,9 +36,9 @@
 
 
 
-<body>
+<body >
     <!--start of forum structure layout-->
-    <div class="container">
+    <div id = "first" class="container">
             <!--
             <div class="row">
                 <div class="col-lg-12 paginationBar forumModule forumMargin">
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="pullRight" style="padding-right:15px;">
-                            <a class="label label-primary" href="#" style="color: white;">View More</a>
+                            <a class="label label-primary" href="#" style="color: white;"></a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,24 @@
     
         </div>
 
-
+        <div id="second" class="container" style="display: none">
+            <div class="container">
+                <div id="cat_new_discussion_1" class="row forumPad1">
+                    <div class="col-sm-12">
+                        <form>
+                            <thread id="thread5";>
+                            <p style = "background-color: grey;display: none;color: black">Discussion</p>
+                            </thread>
+                            <div class="form-group">
+                               
+                                <textarea id = "6" class="newDiscussionText form-control" name="newDiscussionText" rows="2"></textarea>
+                                <a id="ADD" class="btn btn-primary themeButton" onclick="newComment()" href="#">Submit</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

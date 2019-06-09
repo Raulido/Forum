@@ -125,6 +125,10 @@ h6 {
   padding-right: 5px;
 }
 
+.forumPad1 {
+  bottom:0;
+}
+
 .forumTable {
   width: 100%;
   height: auto;
