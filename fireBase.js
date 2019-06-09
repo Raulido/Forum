@@ -9,9 +9,9 @@ var firebaseConfig = {
 };
 firebase = firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(function(user) {
-    if(user){
+    if (user) {
         location.href="main.html";
-    }else{
+    } else {
       // No user is signed in.
     }
 });
