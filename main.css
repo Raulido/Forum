@@ -126,7 +126,7 @@ h6 {
 }
 
 .forumTable {
-  width: 100%; 
+  width: 100%;
   height: auto;
   border: 1px solid black;
 }
@@ -182,3 +182,36 @@ a:hover {
 .forumTable a:hover {
   font-weight: normal;
 }
+/* here */
+
+/* Button */
+
+
+
+/* Style the navigation bar */
+.navbar {
+  width: 100%;
+  background-color: #555;
+  /*overflow: auto;*/
+}
+
+/* Navbar links */
+.navbar a {
+  float: left;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Navbar links on mouse-over */
+.navbar a:hover {
+  color: white;
+}
+
+/* Current/active navbar link */
+/*.active {
+  
+}*/
+

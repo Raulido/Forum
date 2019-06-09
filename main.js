@@ -7,9 +7,35 @@ var firebaseConfig = {
     messagingSenderId: "583638951648",
     appId: "1:583638951648:web:5d375d04b118279e"
 };
-firebase = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+var database = firebase.firestore();
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+        var usersRef = database.collection("users");
+       var query = usersRef.where("uid", "==", user.uid);
+       query.get().then(function(querySnapshot) { //Call get() to get a QuerySnapshot
+
+        if (querySnapshot.empty) { //if user not found in database add to database
+            database.collection("users").add({
+                email: user.email,
+                uid: user.uid, 
+                profilePicture: "defaultUser.jpg"
+            })
+        } else {
+           /*
+                querySnapshot.docs.map(function (documentSnapshot) {
+                    //Not necessary to do that  -> return documentSnapshot.data();
+                    console.log(documentSnapshot.data().name); 
+                });*/
+        }
+
+});
+       /*
+        database.collection("users").add({
+            email: user.email,
+            uid: user.uid
+        })*/
+    
     } else {
       // No user is signed in.
       location.href="index.html";
