@@ -9,12 +9,42 @@ var firebaseConfig = {
 };
 
   firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      document.getElementById("emailField").innerText = user.email;
+      var docRef = db.collection("users").doc(user.uid);
+      
+      docRef.get().then(function(doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        var d = new Date();
+        var dateString = d.toString();
+        var splitDate = dateString.split(" ");
+        dateString = splitDate[1] + " " + splitDate[2] + ", " + splitDate[3];
+        document.getElementById("dateField").innerText = "Member Since: " + dateString;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
 
-    $( document ).ready(function() {
-        console.log( "testing.." );
-        var user = firebase.auth().currentUser;
-        console.log(user);
+    }).catch(function(error) {
+    console.log("Error getting document:", error);
+      });
+    }
+    else{
+
+  }
+});
+
+
+function logout(){
+  firebase.auth().signOut().then(function() {
+      location.href="index.html";
+    }).catch(function(error) {
+      // An error happened.
     });
+}
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";

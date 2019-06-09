@@ -8,11 +8,46 @@ var firebaseConfig = {
     appId: "1:583638951648:web:5d375d04b118279e"
 };
 var firebase = firebase.initializeApp(firebaseConfig);
+var database = firebase.firestore();
 firebase.auth().onAuthStateChanged(function(user) {
-    if(user){   
-    }
-    else{
-        location.href="index.html";
+    if(user) {
+        var usersRef = database.collection("users");
+       var query = usersRef.where("uid", "==", user.uid);
+       query.get().then(function(querySnapshot) { //Call get() to get a QuerySnapshot
+
+        if (querySnapshot.empty) { //if user not found in database add to database
+            var d = new Date();
+            usersRef.doc(user.uid).set({
+                email: user.email,
+                uid: user.uid, 
+                profilePicture: "defaultUser.jpg", 
+                date: d, 
+                location: "USA"
+            });
+            /*
+            database.collection("users").add({
+                email: user.email,
+                uid: user.uid, 
+                profilePicture: "defaultUser.jpg"
+            })*/
+        }else {
+           /*
+                querySnapshot.docs.map(function (documentSnapshot) {
+                    //Not necessary to do that  -> return documentSnapshot.data();
+                    console.log(documentSnapshot.data().name); 
+                });*/
+        }
+
+});
+       /*
+        database.collection("users").add({
+            email: user.email,
+            uid: user.uid
+        })*/
+    
+    } else {
+      // No user is signed in.
+      location.href="index.html";
     }
 });
 
@@ -77,8 +112,6 @@ list.on("child_added",snap => {
     //var node = document.createTextNode("This is new.");
     //tr.appendChild(node);
     var element = document.getElementById("table");
-
-    
 
     var td = document.createElement("td");
     var a = document.createElement("button");
