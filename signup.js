@@ -5,7 +5,6 @@ $(".left form").on("submit", function(event){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function(user) {
         location.href="main.html";
-
     })
     .catch(function(error) {
         // Handle Errors here.

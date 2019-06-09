@@ -24,7 +24,7 @@
 
             <div class=col-6 text-right">
                 <form>
-                    <button class="btn btn-primary themeButton pullRight">Log Out</button>
+                    <button onclick ="logout()" class="btn btn-primary themeButton pullRight">Log Out</button>
                 </form>
                 <form action="profile.html">
                         <button class="btn btn-primary themeButton pullRight mr-1" onclick="openProfile()">Profile Settings</button>
@@ -39,19 +39,20 @@
 <body>
     <!--start of forum structure layout-->
     <div class="container">
+            <!--
             <div class="row">
                 <div class="col-lg-12 paginationBar forumModule forumMargin">
                     <a href="#">Home</a> <i class="fa fa-chevron-circle-right pageArrow"></i> <a href="#">Category</a> <i
                         class="fa fa-chevron-circle-right pageArrow"></i> <a href="#">Discussion</a>
                 </div>
             </div>
-    
+            --->
     
             <div id="category_1" class="row forumModule forumMargin">
                 <a href="#" onclick="showDiscussions(1);">
                     <div class="col-lg-12 columnPad">
                         <div class="pullLeft">
-                            <h1>Category Name</h1>
+                            <h1>General</h1>
                         </div>
                         <div class="pullRight">
                             <a id="startDiscussionButton_1" class="btn btn-primary themeButton" onclick="startDiscussion(1);" href="#">Start Discussion</a>
@@ -65,19 +66,20 @@
                     <form>
                         <div class="form-group">
                             Title
-                            <input type="text" name="newDiscussionTitle" class="form-control" size="40"></input>
+                            <input id = "1"type="text" name="newDiscussionTitle" class="form-control" size="40"></input>
                             <br />
                             Content
-                            <textarea class="newDiscussionText form-control" name="newDiscussionText" rows="10">test</textarea>
+                            <textarea id = "2" class="newDiscussionText form-control" name="newDiscussionText" rows="10"></textarea>
+                            <a id="ADD" class="btn btn-primary themeButton" onclick="newElement()" href="#" style="display: none">Submit</a>
                         </div>
                     </form>
                 </div>
             </div>
     
     
-            <div id="cat_discussions_1" class="row forumPad" style="display:none;">
+            <div id="cat_discussions_1" class="row forumPad" >
                 <div class="col-lg-12">
-                    <table class="forumTable">
+                    <table id = "table" class="forumTable">
                         <thread>
                             <th>
                                 Discussion
@@ -89,18 +91,18 @@
                                 Replies
                             </th>
                         </thread>
-                        <tr class="forumModule">
-                            <td>
+                        <tr class="forumModule" style="display: none">
+                            <td id = "11">
                                 <a href="#">Discussion Name Here</a>
                             </td>
-                            <td>
-                                <a href="#">Geek 1</a>
+                            <td id = "12">
+                                <a>Geek 1</a>
                             </td>
-                            <td class="pullRight">
+                            <td id = "13" class="pullRight">
                                 10
                             </td>
                         </tr>
-                        <tr class="forumModule">
+                        <tr class="forumModule" style="display: none">
                             <td>
                                 <a href="#">Discussion Name Here</a>
                             </td>
@@ -124,7 +126,7 @@
             </div>
     
     
-            <div id="category_2" class="row forumModule forumMargin">
+            <div id="category_2" class="row forumModule forumMargin" style="display: none">
                 <a href="#" onclick="showDiscussions(2);">
                     <div class="col-lg-12 columnPad">
                         <div class="pullLeft">
@@ -207,6 +209,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
     <script src="./main.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

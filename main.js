@@ -7,41 +7,82 @@ var firebaseConfig = {
     messagingSenderId: "583638951648",
     appId: "1:583638951648:web:5d375d04b118279e"
 };
-firebase.initializeApp(firebaseConfig);
-var database = firebase.firestore();
+var firebase = firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        var usersRef = database.collection("users");
-       var query = usersRef.where("uid", "==", user.uid);
-       query.get().then(function(querySnapshot) { //Call get() to get a QuerySnapshot
-
-        if (querySnapshot.empty) { //if user not found in database add to database
-            database.collection("users").add({
-                email: user.email,
-                uid: user.uid, 
-                profilePicture: "defaultUser.jpg"
-            })
-        } else {
-           /*
-                querySnapshot.docs.map(function (documentSnapshot) {
-                    //Not necessary to do that  -> return documentSnapshot.data();
-                    console.log(documentSnapshot.data().name); 
-                });*/
-        }
-
-});
-       /*
-        database.collection("users").add({
-            email: user.email,
-            uid: user.uid
-        })*/
-    
-    } else {
-      // No user is signed in.
-      location.href="index.html";
+    if(user){   
+    }
+    else{
+        location.href="index.html";
     }
 });
 
+const list = firebase.database().ref().child("threads");
+
+list.on("child_added",snap => {
+    var title = snap.val().title;
+    var author = snap.val().author;
+    var Rcount = snap.val().Rcount;
+    var tr = document.createElement("tr");
+    tr.className = "forumModule";
+    //var node = document.createTextNode("This is new.");
+    //tr.appendChild(node);
+    var element = document.getElementById("table");
+
+    
+
+    var td = document.createElement("td");
+    var a = document.createElement("a");
+    var node = document.createTextNode(title);
+    a.href = "#";
+    a.appendChild(node);
+    td.appendChild(a);
+    tr.appendChild(td);
+
+    var td = document.createElement("td");
+    var a = document.createElement("a");
+    var node = document.createTextNode(author);
+    a.appendChild(node);
+    td.appendChild(a);
+    tr.appendChild(td);
+
+    var td = document.createElement("td");
+    td.className = "pullRight";
+    var node = document.createTextNode(Rcount);
+    td.appendChild(node);
+    tr.appendChild(td);
+
+    element.appendChild(tr);
+
+
+    
+    console.log(snap.val());
+});
+
+/*
+var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+*/
 function logout(){
     firebase.auth().signOut().then(function() {
         location.href="index.html";
@@ -69,4 +110,27 @@ function startDiscussion(cat_id){
         $(html_id).css("display", "block");
         $(button_id).text("Cancel");
     }
+    if($(ADD).css("display") == "none"){
+        $(ADD).css("display", "block");
+    }
+    else{
+        $(ADD).css("display", "none");
+    }
 }
+
+function newElement() {
+    var firebaseRef = firebase.database().ref();
+    var title = $("#1").val();
+    var text = $("#2").val();
+    if(title == "" || text == ""){
+        window.alert("Empty Title or Text");
+        return;
+    }
+    var user = firebase.auth().currentUser;
+    var email = user.email;
+    var thread = firebaseRef.child("threads").push();
+    thread.child("title").set(title);
+    thread.child("text").set(text);
+    thread.child("Rcount").set(0);
+    thread.child("author").set(email);
+  }
