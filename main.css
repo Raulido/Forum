@@ -7,12 +7,13 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background: #181818;
+  /*background: #181818;*/
   color: #fff;
   margin-top: 75px;
   margin-bottom: 25px;
   margin-left: 10px;
   margin-right: 10px;
+  
 }
 
 h1 {
@@ -221,4 +222,3 @@ a:hover {
 /*.active {
   
 }*/
-
