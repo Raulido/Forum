@@ -17,12 +17,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         if (querySnapshot.empty) { //if user not found in database add to database
             var d = new Date();
+            var dateString = d.toString();
             usersRef.doc(user.uid).set({
                 email: user.email,
                 uid: user.uid, 
                 profilePicture: "defaultUser.jpg", 
-                date: d, 
-                location: "USA"
+                date: dateString, 
+                location: "USA",
+                numOfPosts: 0
             });
             /*
             database.collection("users").add({
@@ -220,5 +222,24 @@ function newElement() {
         var Rcount = (snapshot.val().Rcount);
         Rcount = Rcount + 1;
         thread.child("Rcount").set(Rcount);
+
+        var docRef = database.collection("users").doc(user.uid);
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                var data = doc.data();
+                var num = data.numOfPosts + 1;
+                return docRef.update({
+                    numOfPosts: num
+                })
+                .then(function() {
+                    console.log("Document successfully updated!");
+                })
+                .catch(function(error) {
+                    // The document probably doesn't exist.
+                    console.error("Error updating document: ", error);
+                });
+            }
+        });
     });
   }

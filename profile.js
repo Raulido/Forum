@@ -17,12 +17,12 @@ var firebaseConfig = {
       
       docRef.get().then(function(doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data());
-        var d = new Date();
-        var dateString = d.toString();
+        var data = doc.data();
+        var dateString = data.date;
         var splitDate = dateString.split(" ");
         dateString = splitDate[1] + " " + splitDate[2] + ", " + splitDate[3];
         document.getElementById("dateField").innerText = "Member Since: " + dateString;
+        document.getElementById("postsField").innerText = "Number of Posts: " + data.numOfPosts.toString();
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -45,11 +45,3 @@ function logout(){
       // An error happened.
     });
 }
-
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-      }
-      
-      function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-      }
