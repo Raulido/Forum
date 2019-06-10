@@ -74,6 +74,7 @@ function hello(x){
     var p = document.createElement("p");
     var node = document.createTextNode("Topic");
     p.appendChild(node);
+    p.style = "padding-top: 15px;";
     element.appendChild(p);
 
     var p = document.createElement("p");
