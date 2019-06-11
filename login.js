@@ -11,6 +11,7 @@ $(".left form").on("submit", function(event){
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage);
+        window.alert(errorMessage);
         return;
       });
 });
