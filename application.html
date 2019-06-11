@@ -17,29 +17,30 @@
 
 
 <body background="background.jpg" style="background: white">
-        <div class="headerfixedbar">
-                <div class="row">
-                    <div class=col-6 text-left" style="margin-top: 10px;">
-                        <a class="headerLogoText" href="main.html">Rebirth Forum</a>
-                    </div>
-        
-                    <div class=col-6 text-right">
-                        <form>
-                            <button onclick="logout()" class="btn themeButton pullRight">Log Out</button>
-                        </form>
-                        <form action="profile.html">
-                            <button class="btn themeButton pullRight mr-1">User Profile</button>
-                        </form>
-                        <form action="application.html">
-                                <button class="btn themeButton pullRight mr-1 disabled">Apply!</button>
-                        </form>
-                    </div>
-                </div>
+    <div class="headerfixedbar">
+        <div class="row">
+            <div class=col-6 text-left" style="margin-top: 10px;">
+                <a class="headerLogoText" href="main.html">Rebirth Forum</a>
             </div>
+
+            <div class=col-6 text-right">
+                <form>
+                    <button onclick="logout()" class="btn themeButton pullRight">Log Out</button>
+                </form>
+                <form action="profile.html">
+                    <button class="btn themeButton pullRight mr-1">User Profile</button>
+                </form>
+                <form action="application.html">
+                    <button class="btn themeButton pullRight mr-1 disabled">Apply!</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <form id="contact" action="javascript:void(0);" method="post" onsubmit="var form = document.getElementById('contact'); form.reset(); return confirm('Confirm information is correct and submit?');">
+        <form id="contact" action="javascript:void(0);" method="post"
+            onsubmit="var form = document.getElementById('contact');  var res = confirm('Confirm information is correct and submit?'); if(res) form.reset();">
             <h3 style="color: black">Rebirth Clan Application</h3>
-            <h4>Enter your information below</h4>
+            <h4 style="color: gray">Enter your information below</h4>
             <fieldset>
                 <input placeholder="Your name" type="text" tabindex="1" required autofocus>
             </fieldset>
@@ -47,14 +48,30 @@
                 <input placeholder="Your Email Address" type="email" tabindex="2" required>
             </fieldset>
             <fieldset>
-                <input placeholder="Your Phone Number (optional)" type="tel" tabindex="3">
+                <div class="weekDays-selector">
+                    <h4 style="color: gray">Days available:</h4>
+                    <input type="checkbox" id="weekday-sun" class="weekday" />
+                    <label for="weekday-sun">S</label>
+                    <input type="checkbox" id="weekday-mon" class="weekday" />
+                    <label for="weekday-mon">M</label>
+                    <input type="checkbox" id="weekday-tue" class="weekday" />
+                    <label for="weekday-tue">T</label>
+                    <input type="checkbox" id="weekday-wed" class="weekday" />
+                    <label for="weekday-wed">W</label>
+                    <input type="checkbox" id="weekday-thu" class="weekday" />
+                    <label for="weekday-thu">T</label>
+                    <input type="checkbox" id="weekday-fri" class="weekday" />
+                    <label for="weekday-fri">F</label>
+                    <input type="checkbox" id="weekday-sat" class="weekday" />
+                    <label for="weekday-sat">S</label>
+                </div>
             </fieldset>
             <fieldset>
-                <textarea placeholder="Write a short paragraph explaining why you should be considered." tabindex="5" required></textarea>
+                <textarea placeholder="Write a short paragraph explaining why you should be considered." tabindex="5"
+                    required></textarea>
             </fieldset>
             <fieldset>
-                <button name="submit" type="submit" id="contact-submit"
-                    data-submit="...Sending">Submit</button>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
             </fieldset>
         </form>
     </div>
